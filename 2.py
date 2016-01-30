@@ -14,3 +14,10 @@ for i in range(len(customers)-1):
 		customersMatrix[i][j].append(0) # flag
 
 
+custList, phoneList, phoneListSorted = [], [], []
+for i in range(len(customers)-1):
+	custList.append(customers[i].split(";"))
+	phoneList.append(customers[i].split(";")[0])
+phoneListSorted = sorted(phoneList)
+
+
