@@ -1,8 +1,8 @@
 customers = open("customers.txt", 'r').read().split('\n')
 calls = open("calls.txt", 'r').read().split('\n')
 
-request1 = 1 # for testing
-request2 = 1 # 0 -> number of call, 1 -> number of dration
+request1 = int(input("Direact(0) or Undirect(1)\n"))
+request2 = int(input("Number of calls (0) or Duration (1)\n"))
 
 customersMatrix = []
 for i in range(len(customers)-1):

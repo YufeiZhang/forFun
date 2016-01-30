@@ -12,7 +12,6 @@ for i in range(len(customers)-1):
 	customersLine.append(0) # due = minutes * rate
 	customersList.append(customersLine)
 	phoneList.append(customersLine[0])
-print(phoneList)
 
 
 for j in range(len(calls)-1):
@@ -25,7 +24,7 @@ for j in range(len(calls)-1):
 			ch[4] += float(callerData[3])
 			ch[5] += minutes * float(callerData[4])
 
-# sort
+# sort phoneList
 phoneListSorted = sorted(phoneList)
 
 
