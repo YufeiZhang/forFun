@@ -40,3 +40,10 @@ print("+--------------+------------------------------" \
 	+ "+---+----------+--------+") 
 
 
+for ch in phoneListSorted:
+	i = phoneList.index(ch)
+	# compute dutation
+	print("|("+customersList[i][0][0:3]+") " + customersList[i][0][3:6] + " "  \
+	 + customersList[i][0][6:10] + "|" + customersList[i][1] + "|" \
+	 + str(customersList[i][3]) + "|" + str(customersList[i][4]) + "|"\
+	 + str(round(customersList[i][5],2)) + "|")
