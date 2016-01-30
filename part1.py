@@ -1,6 +1,6 @@
 import math
 
-def part1():
+def firstPart():
 	customers = open("customers.txt", 'r').read().split('\n')
 	calls = open("calls.txt", 'r').read().split('\n')
 
@@ -51,4 +51,4 @@ def part1():
 		 + str(customersList[i][4]).ljust(10)         + "|" \
 		 + str(round(customersList[i][5],2)).ljust(8) + "|")
 
-part1()
+firstPart()
