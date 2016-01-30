@@ -1,4 +1,5 @@
-import 1
+import part1
+
 customers = open("customers.txt", 'r').read().split('\n')
 calls = open("calls.txt", 'r').read().split('\n')
 
