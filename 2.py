@@ -21,3 +21,11 @@ for i in range(len(customers)-1):
 phoneListSorted = sorted(phoneList)
 
 
+for i in range(len(calls)-1):
+	callsList = calls[i].split(";")
+	caller  = phoneList.index(callsList[1])
+	resever = phoneList.index(callsList[2])
+	customersMatrix[caller][resever][0] += 1
+	customersMatrix[caller][resever][1] += int(callsList[3])
+
+
