@@ -15,3 +15,13 @@ for i in range(len(customers)-1):
 print(phoneList)
 
 
+for j in range(len(calls)-1):
+	sampleCalls = calls[j]
+	callerData = sampleCalls.split(';')
+	for ch in customersList:
+		if callerData[1] in ch:
+			ch[3] += 1
+			minutes = math.ceil(float(callerData[3]) / 60)
+			ch[4] += float(callerData[3])
+			ch[5] += minutes * float(callerData[4])
+
