@@ -25,3 +25,18 @@ for j in range(len(calls)-1):
 			ch[4] += float(callerData[3])
 			ch[5] += minutes * float(callerData[4])
 
+# sort
+phoneListSorted = sorted(phoneList)
+
+
+# print the resault
+print("+--------------+------------------------------" \
+	+ "+---+----------+--------+") 
+
+print("| Phone number | Name                         " \
+	+ "| # | Duration | Due    |")
+
+print("+--------------+------------------------------" \
+	+ "+---+----------+--------+") 
+
+
