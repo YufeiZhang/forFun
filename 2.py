@@ -29,3 +29,15 @@ for i in range(len(calls)-1):
 	customersMatrix[caller][resever][1] += int(callsList[3])
 
 
+for ch in phoneListSorted:
+	i = phoneList.index(ch)
+	for ch2 in phoneListSorted:
+		j = phoneList.index(ch2)
+		if request1 == 0:
+			if i != j:
+				print(str(i+1)+",", str(j+1)+",", customersMatrix[i][j][request2]) 
+		elif request1 == 1 and customersMatrix[i][j][2] == 0 and i != j:
+			customersMatrix[j][i][2] = 1
+			total = customersMatrix[i][j][request2] + customersMatrix[j][i][request2]
+			print(str(i+1)+",", str(j+1)+",", total)
+
