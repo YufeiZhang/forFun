@@ -30,28 +30,33 @@ def run(origin):
     spline.use_endpoint_u = False
  
     # Add points to spline
-    pointTable = [(0,0,0,0), (1,0,3,0), 
-        (1,2,2,0), (0,4,0,0), (0,0,0,0)]
+    pointTable = [(0,0,0,0), (1,0,3,0), (-2,0,4,2),
+        (1,2,2,0), (0,1,2,3), (0,4,0,0), (0,0,0,0)]
     nPoints = len(pointTable)
     spline.points.add(nPoints-1)
     for n in range(nPoints):
         spline.points[n].co = pointTable[n]
- 
-    # Add a monkey
-    #bpy.ops.mesh.primitive_monkey_add()
-    #monkey = bpy.context.object
     
     # Add camera
     # Create object and camera
     bpy.ops.object.add(
         type='CAMERA',
         location=origin,
-        rotation=(pi/2,0,pi))        
+        rotation=(pi/2,0,pi)
+    )        
     rotCam = bpy.context.object
     rotCam.name = 'rot_cam'
-    #cam = ob.data
-    #cam.name = 'MyCam'
+    cam = rotCam.data
+    cam.name = 'RotCam'
     
+    # Lens
+    cam.type = 'PERSP'
+    cam.lens = 25 # this is for camera
+    cam.lens_unit = 'MILLIMETERS'
+    cam.shift_x = -0.05
+    cam.shift_y = 0.1
+    cam.clip_start = 10.0
+    cam.clip_end = 250.0
  
     # Add follow path constraint to monkey
     #cns = monkey.constraints.new('FOLLOW_PATH')
@@ -62,6 +67,8 @@ def run(origin):
     cns.use_fixed_location = False
     cns.forward_axis = 'FORWARD_Z'
     cns.up_axis = 'UP_Y'
+    
+
  
     return
  
