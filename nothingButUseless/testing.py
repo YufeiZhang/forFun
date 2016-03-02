@@ -6,6 +6,12 @@ from mathutils import Vector
 from math import pi
  
 def run(origin):
+    # Delete all old cameras and lamps
+    scn = bpy.context.scene
+    for ob in scn.objects:
+        if ob.type == 'CAMERA' or ob.type == 'LAMP' or ob.type == "CURVE":
+            scn.objects.unlink(ob)
+    
     # Create path data and object
     path = bpy.data.curves.new('MyPath', 'CURVE')
     pathOb = bpy.data.objects.new('Path', path)
