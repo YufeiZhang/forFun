@@ -6,6 +6,7 @@ from mathutils import Vector
 from math import pi
  
 def run(origin):
+    '''
     # Delete all old cameras and lamps
     scn = bpy.context.scene
     for ob in scn.objects:
@@ -73,6 +74,17 @@ def run(origin):
     cns.use_fixed_location = False
     cns.forward_axis = 'FORWARD_Z'
     cns.up_axis = 'UP_Y'
+    '''
+    scn = bpy.context.scene
+    for ob in scn.objects:
+        if ob.type == 'EMPTY':
+            scn.objects.unlink(ob)
+        elif ob.type == 'ARMATURE':
+            headPosition = (-1.5,6.9,3.5)
+    
+    bpy.ops.object.add(type='EMPTY',location=Vector(headPosition))
+    target = bpy.context.object 
+    target.name = 'Target'
     
 
  
