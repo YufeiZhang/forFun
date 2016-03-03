@@ -3,7 +3,7 @@
 #----------------------------------------------------------
 import bpy, mathutils, math
 from mathutils import Vector
-from math import pi
+from math import pi, sin, cos # sin(pi/2) = 1.0
 
 
 def addCopyLocationConstraint(ob, name, target):
@@ -39,10 +39,9 @@ def addTrackToConstraint(ob, name, target):
 
 def rotateAsTime(ob, target, index):
     head = target.pose.bones['Head']
-    #ob.location.x = head.location.x - (index % 360)
-    #ob.location.y = head.location.y - (index % 360)
-    #ob.location.x.Rotation((index % 360)/360 * pi, 4, 'X')
-
+    bpy.data.objects[ob.name].select = True
+    bpy.context.object.location[0] = head.location.x + 10 * cos((index%360)/180*pi)
+    bpy.context.object.location[1] = head.location.y + 10 * sin((index%360)/180*pi)
     return
 
   
@@ -68,11 +67,13 @@ def run(origin):
     # add a distance constraint
     addDistanceConstraint(rot_cam, 'distance', skel_obj)
         
+    # rotate as time goes by
+    rotateAsTime(rot_cam, skel_obj, scn.frame_current)
+        
     # add a track constraint    
     addTrackToConstraint(rot_cam, 'tracking', skel_obj)
     
-    # rotate as time goes by
-    rotateAsTime(rot_cam, skel_obj, scn.frame_current)
+
     
     return
  
