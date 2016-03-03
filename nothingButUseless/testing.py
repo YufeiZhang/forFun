@@ -66,15 +66,16 @@ def run(origin):
     
     # add a distance constraint
     addDistanceConstraint(rot_cam, 'distance', skel_obj)
-        
-    # rotate as time goes by
-    rotateAsTime(rot_cam, skel_obj, scn.frame_current)
-        
+                
     # add a track constraint    
     addTrackToConstraint(rot_cam, 'tracking', skel_obj)
     
-
+    #rotateAsTime(rot_cam, skel_obj, scn.frame_current)
     
+    # I want to change the degree every frame
+    #for i in range(1147):      
+    #    rotateAsTime(rot_cam, skel_obj, i)
+        
     return
  
  
