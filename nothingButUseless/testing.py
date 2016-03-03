@@ -40,19 +40,27 @@ def addTrackToConstraint(ob, name, target):
 def rotateAsTime(ob, target, index):
     camera = bpy.data.objects[ob.name]
     camera.select = True
-    camera.lock_location[2] = True
-    
+    camera.lock_location[2] = True   
     head = target.pose.bones['Head']
-
     camera.rotation_mode = 'XYZ'
     
-    #index = 270
-    camera.location[0] = head.location[0] + 10 * cos((index%360)/180*pi)
-    camera.location[1] = head.location[1] + 10 * sin((index%360)/180*pi)
-    camera.keyframe_insert('location')
-    
+    if index % 360 == 0:
+        camera.location[0] = head.location[0] + 10 * cos(0)
+        camera.location[1] = head.location[1] + 10 * sin(0)
+        camera.keyframe_insert('location')
+    elif index % 360 == 90:
+        camera.location[0] = head.location[0] + 10 * cos(pi/2)
+        camera.location[1] = head.location[1] + 10 * sin(pi/2)
+        camera.keyframe_insert('location')
+    elif index % 360 == 180:
+        camera.location[0] = head.location[0] + 10 * cos(pi)
+        camera.location[1] = head.location[1] + 10 * sin(pi)
+        camera.keyframe_insert('location')
+    elif index % 360 == 270:
+        camera.location[0] = head.location[0] + 10 * cos(3/2*pi)
+        camera.location[1] = head.location[1] + 10 * sin(3/2*pi)
+        camera.keyframe_insert('location')
 
-    
     return
 
   
