@@ -21,16 +21,15 @@ def addDistanceConstraint(ob, name, target):
     dis.target = target
     dis.subtarget = 'Head'
     dis.distance = 5
+    dis.limit_mode = "LIMITDIST_ONSURFACE"
     return
 
 
-def addRotationConstraint(ob, name, target):
-    rot = ob.constraints.new('LIMIT_ROTATION')
-    rot.name = name
-    #rot.min_x = 0
-    #rot.max_x = 90
-    #rot.use_limit_z = 0
-    #rot.use_limit_z = 0
+def rotateAsTime(ob, target, index):
+    head = target.pose.bones['Head']
+    ob.location.x - head.location.x - (index % 10)
+    ob.location.y - head.location.y - (index % 10)
+
     return
 
 
@@ -63,16 +62,16 @@ def run(origin):
     skel_obj = bpy.data.objects['131_09_60fps']
     
     # add a copy location constarin
-    addCopyLocationConstraint(rot_cam, 'copyLocation', skel_obj)
+    addCopyLocationConstraint(rot_cam, 'location', skel_obj)
     
     # add a distance constraint
-    addDistanceConstraint(rot_cam, 'FiveUnits', skel_obj)
+    addDistanceConstraint(rot_cam, 'distance', skel_obj)
     
-    # add a rotation constraint
-    addRotationConstraint(rot_cam, 'LimitRotation', skel_obj)
+    # rotate as time goes by
+    rotateAsTime(rot_cam, skel_obj, scn.frame_current)
     
     # add a track constraint    
-    addTrackToConstraint(rot_cam, 'Tracking', skel_obj)
+    addTrackToConstraint(rot_cam, 'tracking', skel_obj)
     
     return
  
