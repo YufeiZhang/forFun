@@ -4,6 +4,15 @@
 import bpy, mathutils, math
 from mathutils import Vector
 from math import pi
+
+
+def addCopyLocationConstraint(ob, name, target):
+    cpyloc = ob.constraints.new('COPY_LOCATION')
+    cpyloc.name = name
+    cpyloc.use_x = False
+    cpyloc.use_y = False
+    cpyloc.target = target
+    cpyloc.subtarget = 'Head'
     
 
 def addDistanceConstraint(ob, name, target):
@@ -32,7 +41,7 @@ def rotateAsTime(ob, target, index):
     head = target.pose.bones['Head']
     #ob.location.x = head.location.x - (index % 360)
     #ob.location.y = head.location.y - (index % 360)
-    ob.location.x.Rotation((index % 360)/360 * pi, 4, 'X')
+    #ob.location.x.Rotation((index % 360)/360 * pi, 4, 'X')
 
     return
 
@@ -52,6 +61,9 @@ def run(origin):
     
     # get the skel_obj
     skel_obj = bpy.data.objects['131_09_60fps']
+    
+    # add a copy location constarin
+    addCopyLocationConstraint(rot_cam, 'location', skel_obj)
     
     # add a distance constraint
     addDistanceConstraint(rot_cam, 'distance', skel_obj)
