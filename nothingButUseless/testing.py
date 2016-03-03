@@ -9,6 +9,7 @@ def addTrackToConstraint(ob, name, target):
     cns = ob.constraints.new('TRACK_TO')
     cns.name = name
     cns.target = target
+    cns.subtarget = 'Head'
     cns.track_axis = 'TRACK_NEGATIVE_Z'
     cns.up_axis = 'UP_Y'
     cns.owner_space = 'WORLD'
@@ -16,23 +17,23 @@ def addTrackToConstraint(ob, name, target):
     return
  
 def run(origin):
+    # delete the existing camera and empty
     scn = bpy.context.scene
     for ob in scn.objects:
-        if ob.type == 'EMPTY':
+        if ob.type == 'EMPTY' or  ob.type == 'CAMERA':
             scn.objects.unlink(ob)
-        elif ob.type == 'ARMATURE':
-            #headPosition = (-1.5,6.9,3.5)
-            head = ob
-            poss = head.location
+            
+    # crate a camera
+    bpy.ops.object.add(type='CAMERA')        
+    rot_cam = bpy.context.object
+    rot_cam.name = 'rot_cam'
     
-    bpy.ops.object.add(type='EMPTY',location=Vector(poss))
-    target = bpy.context.object 
-    target.name = 'Target'
+    # get the skel_obj
+    skel_obj = bpy.data.objects['131_09_60fps']
     
-    addTrackToConstraint(target, 'Tracking', target)
+    # add a track constraint    
+    addTrackToConstraint(rot_cam, 'Tracking', skel_obj)
     
-
- 
     return
  
 if __name__ == "__main__":
