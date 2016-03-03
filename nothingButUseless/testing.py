@@ -5,6 +5,16 @@ import bpy, mathutils, math
 from mathutils import Vector
 from math import pi
 
+
+def addCopyLocationConstraint(ob, name, target):
+    cpyloc = ob.constraints.new('COPY_LOCATION')
+    cpyloc.name = name
+    cpyloc.use_x = False
+    cpyloc.use_y = False
+    cpyloc.target = target
+    cpyloc.subtarget = 'Head'
+    
+
 def addDistanceConstraint(ob, name, target):
     dis = ob.constraints.new('LIMIT_DISTANCE')
     dis.name = name
@@ -13,17 +23,16 @@ def addDistanceConstraint(ob, name, target):
     dis.distance = 5
     return
 
+
 def addRotationConstraint(ob, name, target):
     rot = ob.constraints.new('LIMIT_ROTATION')
     rot.name = name
-    #rot.target = target
-    #rot.subtarget = 'Head'
-    #rot.rotation=(0, 0, pi)
     #rot.min_x = 0
     #rot.max_x = 90
     #rot.use_limit_z = 0
     #rot.use_limit_z = 0
     return
+
 
 def addTrackToConstraint(ob, name, target):
     cns = ob.constraints.new('TRACK_TO')
@@ -35,6 +44,7 @@ def addTrackToConstraint(ob, name, target):
     cns.owner_space = 'WORLD'
     cns.target_space = 'WORLD'
     return
+ 
  
 def run(origin):
     # delete the existing camera and empty
@@ -52,6 +62,9 @@ def run(origin):
     # get the skel_obj
     skel_obj = bpy.data.objects['131_09_60fps']
     
+    # add a copy location constarin
+    addCopyLocationConstraint(rot_cam, 'copyLocation', skel_obj)
+    
     # add a distance constraint
     addDistanceConstraint(rot_cam, 'FiveUnits', skel_obj)
     
@@ -62,6 +75,7 @@ def run(origin):
     addTrackToConstraint(rot_cam, 'Tracking', skel_obj)
     
     return
+ 
  
 if __name__ == "__main__":
     run((0,0,0))
